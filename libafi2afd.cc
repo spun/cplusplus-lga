@@ -233,6 +233,7 @@ void ResultadoAFD(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres
 	//Recorrer los estados de cada estado nuevo
 	//Ver a que estado van 
 	//Mostrarlo
+	cout<<"1 !"<<endl;
 	bool newEstado[10], estadoAux[10], final=false;
 	int aux=0, cont=0;
 	for(cont=0; cont<10;cont++)
@@ -294,7 +295,7 @@ void BuscarEstadosNuevos(bool newEstado[], tVector Orig, tVectCaracteres VectCar
 		}
 		k=0;
 		estadoFinal=BuscarNumeroEstadoNuevo(Estados, newEstado);
-		cout<<estadoInicial+1<<" "<<VectCaract[j]<<" "<<estadoFinal<<endl;
+		cout<<estadoInicial+1<<" "<<VectCaract[j]<<" "<<estadoFinal<<endl; //Mostrar el resultado
 	}
 }
 
