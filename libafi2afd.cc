@@ -41,25 +41,62 @@ void BuscarInicios(tVector Orig, tVectEstados Estados, int lineas)
 	}
 }
 
-//Almacena y renombra el resto de estados del AFI.
-void Buscar(tVector Orig, tVectEstados Estados, int lineas)
+//Tenemos que rellenar el vector de caracteres
+void CaracteresAFI(tVector Orig, int lineas, tVectCaracteres Caracteres, int &numCaracteres)
 {
-	int cont=0, cont2=0, referencia=0;
-/*De momento solo para caracter a( hacer un for para comprobar todos los caracteres que de momento no almacenamos pero que shadow debe implementar algun dia en su casa mientras se aburre)*/
-	for(cont=1; cont<=11; cont++)
-	{
-		referencia=Estados[0][cont];
+//De momento no tengo NPI de como rellenarlo si no es al almacenarlo en el primero, asi que lo pongo antes 
+//de la funcion que la necesita (Buscar) y relleno como me da la gana
+/*int cont=0, cont2=0;
+bool repetido=false;
 
-		for(cont2=0; cont2<lineas; cont2++)
+	for(cont=0; cont<lineas; cont++)
+	{
+		for(cont2=0; cont2<numCaracteres || numCaracteres==0; cont2++)
 		{
-			if((Orig[cont2][0]-'0')==referencia && Orig[cont2][1]=='a')
+			if(Orig[cont][1]==Caracteres[cont2])
 			{
-				cout<<Orig[cont2][2]<<endl;
+				repetido=true;
 			}
 		}
-		
-	}
 
+		if(repetido==false)
+		{
+			Caracteres[numCaracteres+1]=Orig[lineas][2];
+			
+		}
+	}
+	*/
+
+Caracteres[0]='a';
+Caracteres[1]='b';
+numCaracteres=2;
+
+}
+
+//Almacena y renombra el resto de estados del AFI.
+void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
+{
+	int cont=0, cont2=0, referencia=0, contCaracter=0;
+	
+	for(contCaracter=0; contCaracter<numCaract; contCaracter++)
+	{	
+		cout<<"Caracter: "<<VectCaract[contCaracter]<<endl;
+
+		for(cont=1; cont<=11; cont++)
+		{
+			referencia=Estados[0][cont];
+
+			for(cont2=0; cont2<lineas; cont2++)
+			{
+
+				if((Orig[cont2][0]-'0')==referencia && Orig[cont2][1]==VectCaract[contCaracter])
+				{
+					cout<<Orig[cont2][2]<<endl;;
+				}
+			}
+		}
+			
+	}
 }
 
 
