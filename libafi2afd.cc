@@ -120,15 +120,16 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 		}
 	}	
 	//Comprobacion
-/*	for(int t=0;t<100;t++) 
+	for(int t=0;t<100;t++) 
 	{
+		cout<<"Estado: "<<t<<" estados: ";
 		for(int h=0;h<10;h++)
 		{
 			if(Estados[t][h]==true)
-				cout<<h<<endl;
+				cout<<h<<" ";
 		}
 		cout<<endl;
-	}*/
+	}
 }
 
 //Devuelve TRUE si el estado ya existe
