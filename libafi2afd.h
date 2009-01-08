@@ -32,4 +32,3 @@ bool BuscarElemento(tVectCaracteres Caracteres, int tamano, char caracter);
 
 
 
-
