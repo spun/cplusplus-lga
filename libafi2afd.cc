@@ -126,13 +126,14 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 //Busca los estados siguientes del estado que se le pasa para crear un nuevo Estado
 void BuscarEstadoSiguiente(bool newEstado[], int estado, tVector Orig, tVectCaracteres VectCaract, tVectEstados Estados)
 {
+	int i,k;
 	for(int j=0; j<5; j++) //Para cada letra
 	{
-		for(int k=0; k<10;k++) //Para cada estado
+		for(k=0; k<10;k++) //Para cada estado
 		{
 			if(Estados[0][k]==true) //Si el estado esta a true lo buscamos
 			{
-				for(int i=0; i<100; i++) //Recorremos para buscar ese estado en el vector de origen
+				for(i=0; i<100; i++) //Recorremos para buscar ese estado en el vector de origen
 				{
 					if(Orig[i][0]-'0'==k) //Si encontramos uno que coincide
 					{
