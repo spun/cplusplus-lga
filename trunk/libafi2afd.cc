@@ -110,7 +110,7 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 		}
 		if(aux!=0)
 		{		
-			BuscarEstadoSiguiente(newEstado, Orig, VectCaract, estadoAux, Estados); //Busca y añade al vector de estados
+			BuscarEstadoSiguiente(newEstado, Orig, VectCaract, estadoAux, Estados, numCaract); //Busca y añade al vector de estados
 			aux=0;
 			for(int cont=0; cont<10;cont++)
 			{
@@ -176,10 +176,10 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 }
 
 //Busca los estados siguientes del estado que se le pasa para crear un nuevo Estado
-void BuscarEstadoSiguiente(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados)
+void BuscarEstadoSiguiente(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados, int numCaract)
 {
 	int i,k;
-	for(int j=0; j<5; j++) //Para cada letra
+	for(int j=0; j<numCaract; j++) //Para cada letra
 	{
 		for(k=0; k<10;k++) //Para cada estado
 		{
