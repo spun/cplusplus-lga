@@ -10,7 +10,7 @@ bool ProcesarLetra(char letra);
 void AlmacenaLetra(char l, bool e, int &lin, int &fil, tVector vOrig);
 void BuscarInicios(tVector Orig, tVectEstados Estados, int lineas);
 void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract);
-bool BuscarRepetidos (tVectEstados Estados, int a, int b);
+bool BuscarRepetidos (tVectEstados Estados, bool newEstado);
 
 void CaracteresAFI(tVector Orig, int lineas, tVectCaracteres Caracteres, int &numCaracteres);
 
