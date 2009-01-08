@@ -75,6 +75,7 @@ numCaracteres=2;
 void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
 {
 	int cont=0, cont2=0, referencia=0, contCaracter=0;
+	bool newEstado[10];
 	
 	for(contCaracter=0; contCaracter<numCaract; contCaracter++)
 	{	
@@ -98,20 +99,30 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 }
 
 //Devuelve TRUE si el estado ya existe
-bool BuscarRepetidos (tVectEstados Estados, int a, int b)
+bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 {
-	bool repetido=false, i=0, j=0;
+	bool repetido=false, iguales=true;
+	int cont=0, i=0, j=0;
 	
-	for(i=0; i<100; i++)
+	for(i=0; i<100 && repetido==false; i++) //Por cada linea si no se ha encontrado
 	{
-		for(j=1; j<11; j++)
+		iguales=true;
+		for(j=0; j<11 && iguales==true; j++) //Recorremos la linea
 		{
-			
+			if(Estados[i][j]==newEstado[j])	//Si las posiciones son iguales
+			{
+				cont++;	//Aumenatmos el contador
+			}
+			else
+			{
+				iguales=false;	//Si alguno falla dejamos de recorrer esa linea
+				cont=0; //Y ponemos el contador de nuevo a 0
+			}
 		}
+		if(cont==10) //Si al terminar con una linea el contador es igual a 10
+			repetido=true; //Esta repetido y podemos terminar la ejecucion
 	}
-	
-	
-	
+
 	return repetido;
 }
 
