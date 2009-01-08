@@ -145,32 +145,17 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 	for(i=0; i<100 && repetido==false; i++) //Por cada linea si no se ha encontrado
 	{
 		iguales=true;
-		for(j=0; j<11 && iguales==true; j++) //Recorremos la linea
+		for(j=0; j<10 && iguales==true; j++) //Recorremos la linea
 		{
 			
-			if(Estados[i][j]==true)	//Si las posiciones son iguales
-			{
-				if(newEstado[j]==true)
-				{	
-					cont++;
-				}
-				else
-				{
-					iguales=false;
-					cont=0;
-				}		
+			if(Estados[i][j]==newEstado[j])
+			{	
+				cont++;
 			}
 			else
 			{
-				if(newEstado[j]==false)
-				{
-					cont++;
-				}
-				else
-				{
-					iguales=false;
-					cont=0;
-				}
+				iguales=false;
+				cont=0;
 			}
 		}
 		if(cont==10) //Si al terminar con una linea el contador es igual a 10
