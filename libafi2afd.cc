@@ -74,28 +74,25 @@ numCaracteres=2;
 //Almacena y renombra el resto de estados del AFI.
 void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
 {
-	int cont=0, cont2=0, referencia=0, contCaracter=0;
 	bool newEstado[10];
+	for(int cont=0; cont<10;cont++)
+		newEstado[cont]=false;
 	
-	for(contCaracter=0; contCaracter<numCaract; contCaracter++)
-	{	
-		cout<<"Caracter: "<<VectCaract[contCaracter]<<endl;
-
-		for(cont=1; cont<=11; cont++)
+	//Recorrer el vector de estados para crear los nuevos estados
+	for(int i=0; i<100; i++)
+	{
+		for(int j=0; j<10; j++)
 		{
-			//referencia=Estados[0][cont];
-
-			for(cont2=0; cont2<lineas; cont2++)
+			if(Estados[i][j]==true)
 			{
-
-				if((Orig[cont2][0]-'0')==referencia && Orig[cont2][1]==VectCaract[contCaracter])
-				{
-					cout<<Orig[cont2][2]<<endl;;
-				}
+				//Va a crear uno por cada estado, hay que juntarlos
+				BuscarEstadoSiguiente(newEstado, j, Orig, VectCaract, Estados); //Busca y añade al vector de estados
 			}
 		}
-			
 	}
+	
+
+			
 }
 
 //Devuelve TRUE si el estado ya existe
@@ -126,7 +123,36 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 	return repetido;
 }
 
-
+//Busca los estados siguientes del estado que se le pasa para crear un nuevo Estado
+void BuscarEstadoSiguiente(bool newEstado[], int estado, tVector Orig, tVectCaracteres VectCaract, tVectEstados Estados)
+{
+	for(int j=0; j<5; j++) //Para cada letra
+	{
+		for(int k=0; k<10;k++) //Para cada estado
+		{
+			if(Estados[0][k]==true) //Si el estado esta a true lo buscamos
+			{
+				for(int i=0; i<100; i++) //Recorremos para buscar ese estado en el vector de origen
+				{
+					if(Orig[i][0]-'0'==k) //Si encontramos uno que coincide
+					{
+						if(Orig[i][1]==VectCaract[j]) //Y si ademas coincide la letra que estamos buscando
+						{
+							newEstado[Orig[i][2]-'0']=true; //Ponemos un true en nuestro estado
+						}
+					}
+				}
+				i=0;
+			}
+		}
+		k=0;
+		//Comprobar si existe
+		if(!BuscarRepetidos(Estados, newEstado)) //Si no existe
+		{
+			//Meterlo al vector de estados
+		}
+	}
+}
 
 
 
