@@ -20,7 +20,7 @@ int main (int argc , char *argv[])
 	//Iniciar el vector de booleanos
 	for(int i=0; i<100; i++)
 	{
-		for(int j=0; j<11; j++)
+		for(int j=0; j<10; j++)
 		{
 			vEstados[i][j]=false;
 		}
