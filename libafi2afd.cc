@@ -74,10 +74,12 @@ numCaracteres=2;
 //Almacena y renombra el resto de estados del AFI.
 void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
 {
-	bool newEstado[10];
+	bool newEstado[10], estadoAux[10];
 	for(int cont=0; cont<10;cont++)
+	{
 		newEstado[cont]=false;
-	
+		estadoAux[cont]=false;
+	}
 	//Recorrer el vector de estados para crear los nuevos estados
 	for(int i=0; i<100; i++)
 	{
@@ -85,10 +87,10 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 		{
 			if(Estados[i][j]==true)
 			{
-				//Va a crear uno por cada estado, hay que juntarlos
-				BuscarEstadoSiguiente(newEstado, j, Orig, VectCaract, Estados); //Busca y añade al vector de estados
+				estadoAux[j]=true;
 			}
 		}
+		BuscarEstadoSiguiente(newEstado, Orig, VectCaract, estadoAux, Estados); //Busca y añade al vector de estados
 	}
 	
 
@@ -124,14 +126,14 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 }
 
 //Busca los estados siguientes del estado que se le pasa para crear un nuevo Estado
-void BuscarEstadoSiguiente(bool newEstado[], int estado, tVector Orig, tVectCaracteres VectCaract, tVectEstados Estados)
+void BuscarEstadoSiguiente(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados)
 {
 	int i,k;
 	for(int j=0; j<5; j++) //Para cada letra
 	{
 		for(k=0; k<10;k++) //Para cada estado
 		{
-			if(Estados[0][k]==true) //Si el estado esta a true lo buscamos
+			if(estadoAux[k]==true) //Si el estado esta a true lo buscamos
 			{
 				for(i=0; i<100; i++) //Recorremos para buscar ese estado en el vector de origen
 				{
