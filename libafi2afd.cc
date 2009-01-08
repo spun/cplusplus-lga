@@ -42,33 +42,49 @@ void BuscarInicios(tVector Orig, tVectEstados Estados, int lineas)
 //Tenemos que rellenar el vector de caracteres
 void CaracteresAFI(tVector Orig, int lineas, tVectCaracteres Caracteres, int &numCaracteres)
 {
-//De momento no tengo NPI de como rellenarlo si no es al almacenarlo en el primero, asi que lo pongo antes 
-//de la funcion que la necesita (Buscar) y relleno como me da la gana
-/*int cont=0, cont2=0;
-bool repetido=false;
+	int cont1=0;
 
-	for(cont=0; cont<lineas; cont++)
+	for(cont1=0; cont1<lineas; cont1++)
 	{
-		for(cont2=0; cont2<numCaracteres || numCaracteres==0; cont2++)
+		
+		if(numCaracteres!=0)
 		{
-			if(Orig[cont][1]==Caracteres[cont2])
+			if(!BuscarElemento(Caracteres, numCaracteres, (Orig[cont1][1])))
 			{
-				repetido=true;
+				Caracteres[numCaracteres]=Orig[cont1][1];
+				numCaracteres++;
 			}
 		}
+		else
+		{			
+				Caracteres[numCaracteres]=Orig[cont1][1];
+				numCaracteres++;
+		}
 
-		if(repetido==false)
+	}
+}
+
+//Informa si existe el caracter en el vector
+bool BuscarElemento(tVectCaracteres Caracteres, int tamano, char caracter)
+{
+	int cont=0;
+	bool encontrado=false;
+
+	if(caracter=='!' || caracter=='#')
+	{
+		encontrado=true;
+	}
+	else
+	{
+		for(cont=0; cont<tamano && encontrado==false; cont++)
 		{
-			Caracteres[numCaracteres+1]=Orig[lineas][2];
-			
+			if(Caracteres[cont]==caracter)
+			{
+				encontrado=true;
+			}	
 		}
 	}
-	*/
-
-Caracteres[0]='a';
-Caracteres[1]='b';
-numCaracteres=2;
-
+	return encontrado; 
 }
 
 //Almacena y renombra el resto de estados del AFI.
