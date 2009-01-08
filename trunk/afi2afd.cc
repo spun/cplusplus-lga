@@ -16,7 +16,16 @@ int main (int argc , char *argv[])
 	tVectEstados vEstados;
 	tVectCaracteres vCaracteres;
 	int numCaracteres=0; //Numero de caracteres que existen en el AFI
-
+	
+	//Iniciar el vector de booleanos
+	for(int i=0; i<100; i++)
+	{
+		for(int j=0; j<11; j++)
+		{
+			vEstados[i][j]=false;
+		}
+	}
+	
 	fichero.open(argv[1],ios::in);
 	if(fichero.is_open())
 	{

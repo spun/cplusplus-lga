@@ -28,15 +28,13 @@ void AlmacenaLetra(char l, bool e, int &lin, int &fil, tVector vOrig)
 //Almacena y renombra los estados inciales del AFI.
 void BuscarInicios(tVector Orig, tVectEstados Estados, int lineas)
 {
-	int cont=0, cont2=1;
+	int cont=0;
 	
-	Estados[0][0]=1;
 	for(cont=0; cont<lineas; cont++)
 	{
 		if(Orig[cont][1]=='!')
 		{
-			Estados[0][cont2]=Orig[cont][0]-'0';
-			cont2++;
+			Estados[0][Orig[cont][0]-'0']=true;
 		}
 	}
 }
@@ -84,7 +82,7 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 
 		for(cont=1; cont<=11; cont++)
 		{
-			referencia=Estados[0][cont];
+			//referencia=Estados[0][cont];
 
 			for(cont2=0; cont2<lineas; cont2++)
 			{
@@ -99,6 +97,23 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 	}
 }
 
+//Devuelve TRUE si el estado ya existe
+bool BuscarRepetidos (tVectEstados Estados, int a, int b)
+{
+	bool repetido=false, i=0, j=0;
+	
+	for(i=0; i<100; i++)
+	{
+		for(j=1; j<11; j++)
+		{
+			
+		}
+	}
+	
+	
+	
+	return repetido;
+}
 
 
 
