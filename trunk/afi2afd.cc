@@ -14,6 +14,8 @@ int main (int argc , char *argv[])
 	int lin=0, fil=0 ;
 	tVector vOrig;
 	tVectEstados vEstados;
+	tVectCaracteres vCaracteres;
+	int numCaracteres=0; //Numero de caracteres que existen en el AFI
 
 	fichero.open(argv[1],ios::in);
 	if(fichero.is_open())
@@ -35,8 +37,10 @@ int main (int argc , char *argv[])
 			fichero>>letra;
         	}
 		fichero.close();
+
+		CaracteresAFI(vOrig, lin, vCaracteres, numCaracteres);
 		BuscarInicios(vOrig,vEstados,lin);
-		Buscar(vOrig,vEstados,lin);
+		Buscar(vOrig,vEstados,lin, vCaracteres, numCaracteres);
 		/*cout<<"Fila: "<<fil<<"   Linea: "<<lin<<endl<<endl<<endl<<endl;
 		for(int cont=0; cont<lin; cont++)
 		{
