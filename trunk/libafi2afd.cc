@@ -91,7 +91,8 @@ bool BuscarElemento(tVectCaracteres Caracteres, int tamano, char caracter)
 void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
 {
 	bool newEstado[10], estadoAux[10];
-	for(int cont=0; cont<10;cont++)
+	int aux=0, cont=0;
+	for(cont=0; cont<10;cont++)
 	{
 		newEstado[cont]=false;
 		estadoAux[cont]=false;
@@ -104,13 +105,30 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 			if(Estados[i][j]==true)
 			{
 				estadoAux[j]=true;
+				aux++;
 			}
 		}
-		BuscarEstadoSiguiente(newEstado, Orig, VectCaract, estadoAux, Estados); //Busca y añade al vector de estados
-	}
-	
-
-			
+		if(aux!=0)
+		{		
+			BuscarEstadoSiguiente(newEstado, Orig, VectCaract, estadoAux, Estados); //Busca y añade al vector de estados
+			aux=0;
+			for(int cont=0; cont<10;cont++)
+			{
+				newEstado[cont]=false;
+				estadoAux[cont]=false;
+			}
+		}
+	}	
+	//Comprobacion
+/*	for(int t=0;t<100;t++) 
+	{
+		for(int h=0;h<10;h++)
+		{
+			if(Estados[t][h]==true)
+				cout<<h<<endl;
+		}
+		cout<<endl;
+	}*/
 }
 
 //Devuelve TRUE si el estado ya existe
@@ -124,20 +142,35 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[])
 		iguales=true;
 		for(j=0; j<11 && iguales==true; j++) //Recorremos la linea
 		{
-			if(Estados[i][j]==newEstado[j])	//Si las posiciones son iguales
+			
+			if(Estados[i][j]==true)	//Si las posiciones son iguales
 			{
-				cont++;	//Aumenatmos el contador
+				if(newEstado[j]==true)
+				{	
+					cont++;
+				}
+				else
+				{
+					iguales=false;
+					cont=0;
+				}		
 			}
 			else
 			{
-				iguales=false;	//Si alguno falla dejamos de recorrer esa linea
-				cont=0; //Y ponemos el contador de nuevo a 0
+				if(newEstado[j]==false)
+				{
+					cont++;
+				}
+				else
+				{
+					iguales=false;
+					cont=0;
+				}
 			}
 		}
 		if(cont==10) //Si al terminar con una linea el contador es igual a 10
 			repetido=true; //Esta repetido y podemos terminar la ejecucion
 	}
-
 	return repetido;
 }
 
@@ -168,8 +201,38 @@ void BuscarEstadoSiguiente(bool newEstado[], tVector Orig, tVectCaracteres VectC
 		//Comprobar si existe
 		if(!BuscarRepetidos(Estados, newEstado)) //Si no existe
 		{
-			//Meterlo al vector de estados
+			AgregarEstado(newEstado, Estados); //Lo agregamos
 		}
+	}
+}
+
+//Agrega un nuevo estado al vector de estados
+void AgregarEstado(bool newEstado[], tVectEstados Estados)
+{
+	int i=0, j=0, k=0;
+	bool vacio=false, agregado=false;
+	
+	for(i=0;i<100 && agregado==false;i++)
+	{
+		for(j=0;j<10;j++)
+		{
+			if(Estados[i][j]==true)
+			{
+				vacio=false;
+			}
+		}
+		if(vacio==true)
+		{
+			for(k=0;k<10;k++)
+			{
+				if(newEstado[k]==true)
+				{
+					Estados[i][k]=true;
+				}
+			}
+			agregado=true;
+		}
+		vacio=true;
 	}
 }
 
