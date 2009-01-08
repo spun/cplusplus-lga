@@ -124,7 +124,7 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 		}
 	}	
 	//Comprobacion
-	for(int t=0;t<100;t++) 
+	/*for(int t=0;t<100;t++) 
 	{
 		cout<<"Estado: "<<t<<" estados: ";
 		for(int h=0;h<10;h++)
@@ -133,7 +133,8 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 				cout<<h<<" ";
 		}
 		cout<<endl;
-	}
+	}*/
+	ResultadoAFD(Orig, Estados, lineas,VectCaract, numCaract);
 }
 
 //Devuelve TRUE si el estado ya existe
@@ -226,13 +227,105 @@ void AgregarEstado(bool newEstado[], tVectEstados Estados)
 	}
 }
 
+//Muestra el AFD
+void ResultadoAFD(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
+{
+	//Recorrer los estados de cada estado nuevo
+	//Ver a que estado van 
+	//Mostrarlo
+	bool newEstado[10], estadoAux[10], final=false;
+	int aux=0, cont=0;
+	for(cont=0; cont<10;cont++)
+	{
+		newEstado[cont]=false;
+		estadoAux[cont]=false;
+	}
+	//Recorrer el vector de estados
+	for(int i=0; i<100 && final==false; i++)
+	{
+		for(int j=0; j<10; j++)
+		{
+			if(Estados[i][j]==true)
+			{
+				estadoAux[j]=true; //Copiamos a un estado auxiliar
+				aux++;
+			}
+		}
+		if(aux!=0)
+		{		
+			//Buscamos estado siguiente
+			BuscarEstadosNuevos(newEstado, Orig, VectCaract, estadoAux, Estados, numCaract,i); //Busca y añade al vector de estados
+			aux=0;
+			for(int cont=0; cont<10;cont++)
+			{
+				newEstado[cont]=false;
+				estadoAux[cont]=false;
+			}
+		}
+		else
+		{
+			final=true;
+		}
+	}	
+}
 
+//Busca los estados siguientes del estado que se le pasa para buscar que nuevo estado es
+void BuscarEstadosNuevos(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados, int numCaract, int estadoInicial)
+{
+	int i,k, estadoFinal=0;
+	for(int j=0; j<numCaract; j++) //Para cada letra
+	{
+		for(k=0; k<10;k++) //Para cada estado
+		{
+			if(estadoAux[k]==true) //Si el estado esta a true lo buscamos
+			{
+				for(i=0; i<100; i++) //Recorremos para buscar ese estado en el vector de origen
+				{
+					if(Orig[i][0]-'0'==k) //Si encontramos uno que coincide
+					{
+						if(Orig[i][1]==VectCaract[j]) //Y si ademas coincide la letra que estamos buscando
+						{
+							newEstado[Orig[i][2]-'0']=true; //Ponemos un true en nuestro estado
+						}
+					}
+				}
+				i=0;
+			}
+		}
+		k=0;
+		estadoFinal=BuscarNumeroEstadoNuevo(Estados, newEstado);
+		cout<<estadoInicial+1<<" "<<VectCaract[j]<<" "<<estadoFinal<<endl;
+	}
+}
 
-
-
-
-
-
+//Retorna el numero del estado AFD coincidente con los estados del AFI
+int BuscarNumeroEstadoNuevo(tVectEstados Estados, bool newEstado[])
+{
+	bool repetido=false, iguales=true;
+	int cont=0, i=0, j=0, numeroEst=0;
+	
+	for(i=0; i<100 && repetido==false; i++) //Por cada linea si no se ha encontrado
+	{
+		iguales=true;
+		for(j=0; j<10 && iguales==true; j++) //Recorremos la linea
+		{
+			
+			if(Estados[i][j]==newEstado[j])
+			{	
+				cont++;
+			}
+			else
+			{
+				iguales=false;
+				cont=0;
+			}
+		}
+		numeroEst++;
+		if(cont==10) //Si al terminar con una linea el contador es igual a 10
+			repetido=true; //Esta repetido y podemos terminar la ejecucion
+	}
+	return numeroEst;
+}
 
 
 
