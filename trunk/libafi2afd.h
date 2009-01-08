@@ -13,6 +13,9 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 bool BuscarRepetidos (tVectEstados Estados, bool newEstado[]);
 void BuscarEstadoSiguiente(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados, int numCaract);
 void AgregarEstado(bool newEstado[], tVectEstados Estados);
+void ResultadoAFD(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract);
+void BuscarEstadosNuevos(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados, int numCaract, int i);
+int BuscarNumeroEstadoNuevo(tVectEstados Estados, bool newEstado[]);
 
 void CaracteresAFI(tVector Orig, int lineas, tVectCaracteres Caracteres, int &numCaracteres);
 bool BuscarElemento(tVectCaracteres Caracteres, int tamano, char caracter);
