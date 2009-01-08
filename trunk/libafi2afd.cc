@@ -90,7 +90,7 @@ bool BuscarElemento(tVectCaracteres Caracteres, int tamano, char caracter)
 //Almacena y renombra el resto de estados del AFI.
 void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectCaract, int numCaract)
 {
-	bool newEstado[10], estadoAux[10];
+	bool newEstado[10], estadoAux[10], final=false;
 	int aux=0, cont=0;
 	for(cont=0; cont<10;cont++)
 	{
@@ -98,7 +98,7 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 		estadoAux[cont]=false;
 	}
 	//Recorrer el vector de estados para crear los nuevos estados
-	for(int i=0; i<100; i++)
+	for(int i=0; i<100 && final==false; i++)
 	{
 		for(int j=0; j<10; j++)
 		{
@@ -117,6 +117,10 @@ void Buscar(tVector Orig, tVectEstados Estados, int lineas,tVectCaracteres VectC
 				newEstado[cont]=false;
 				estadoAux[cont]=false;
 			}
+		}
+		else
+		{
+			final=true;
 		}
 	}	
 	//Comprobacion
