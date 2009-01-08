@@ -1,6 +1,6 @@
 typedef char tVector[100][3];
 //En el primer campo almacena la renombnracion de los estados 
-typedef bool tVectEstados[100][11];
+typedef bool tVectEstados[100][10];
 
 //El alfabeto de entrada del AFI tendrá como mucho 5 simbolos
 typedef char tVectCaracteres[5];
