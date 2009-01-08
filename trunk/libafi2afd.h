@@ -14,6 +14,7 @@ bool BuscarRepetidos (tVectEstados Estados, bool newEstado[]);
 void BuscarEstadoSiguiente(bool newEstado[], tVector Orig, tVectCaracteres VectCaract, bool estadoAux[], tVectEstados Estados);
 
 void CaracteresAFI(tVector Orig, int lineas, tVectCaracteres Caracteres, int &numCaracteres);
+bool BuscarElemento(tVectCaracteres Caracteres, int tamano, char caracter);
 
 
 
