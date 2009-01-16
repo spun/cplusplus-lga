@@ -10,19 +10,20 @@ int main (int argc , char *argv[])
 {
 	char letra;
 	ifstream fichero;
-	bool especial;
-	int lin=0, fil=0 ;
+	bool especial, estAceptacion[100], evitaRepeticion[100];
+	int lin=0, fil=0 ,numCaracteres=0; //Numero de caracteres que existen en el AFI
 	tVector vOrig;
 	tVectEstados vEstados;
-	tVectCaracteres vCaracteres;
-	int numCaracteres=0; //Numero de caracteres que existen en el AFI
+	tVectCaracteres vCaracteres; 
 	
 	//Iniciar el vector de booleanos
 	for(int i=0; i<100; i++)
 	{
 		for(int j=0; j<10; j++)
 		{
+			estAceptacion[i]=false;
 			vEstados[i][j]=false;
+			evitaRepeticion[i]=false;
 		}
 	}
 	
@@ -47,18 +48,10 @@ int main (int argc , char *argv[])
         	}
 		fichero.close();
 
-		CaracteresAFI(vOrig, lin, vCaracteres, numCaracteres);
+		CaracteresAFI(vOrig, lin, vCaracteres, numCaracteres, estAceptacion);
 		BuscarInicios(vOrig,vEstados,lin);
 		Buscar(vOrig,vEstados,lin, vCaracteres, numCaracteres);
-		/*cout<<"Fila: "<<fil<<"   Linea: "<<lin<<endl<<endl<<endl<<endl;
-		for(int cont=0; cont<lin; cont++)
-		{
-			for(int cont2=0; cont2<3; cont2++)
-			{
-				cout<<vOrig[cont][cont2];
-			}
-			cout<<endl;
-		}*/
+		ResultadoAFD(vOrig, vEstados, lin, vCaracteres, numCaracteres, estAceptacion, evitaRepeticion);
 	}
 	else
 	{
